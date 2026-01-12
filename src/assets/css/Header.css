@@ -1,0 +1,59 @@
+/* src/assets/css/Header.css */
+
+.header-nav {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 0 20px;
+    margin-bottom: 30px;
+}
+
+.header-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.header-links {
+    display: flex;
+    gap: 20px;
+}
+
+.header-link {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.header-link:hover {
+    color: #0056b3;
+}
+
+.header-user-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-user-info {
+    color: #666;
+    font-size: 14px;
+}
+
+.btn-logout {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.btn-logout:hover {
+    background-color: #c82333;
+}

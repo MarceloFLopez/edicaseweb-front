@@ -1,0 +1,125 @@
+.home-container {
+    max-width: 800px; /* Mais estreito para facilitar a leitura */
+    margin: auto;
+    padding: 0 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* DESTAQUE PRINCIPAL */
+.main-highlight {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+    margin-bottom: 50px;
+    border: 1px solid #f0f0f0;
+}
+
+.card-tag-destaque {
+    color: #007bff;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.main-highlight h1 {
+    font-size: 2.2rem;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.main-content {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #4a4a4a;
+    white-space: pre-wrap;
+}
+
+.home-container {
+    max-width: 800px; /* Padrão de leitura focada */
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.main-highlight {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 16px; /* Arredondamento suave padronizado */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    margin-bottom: 50px;
+    border: 1px solid #f0f0f0;
+}
+
+.card-tag-destaque {
+    color: #007bff;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.main-highlight h1 {
+    font-size: 2rem;
+    color: #1a1a1a;
+    margin: 0 0 20px 0;
+    line-height: 1.3;
+}
+
+.main-content {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #444;
+    white-space: pre-wrap;
+}
+
+/* Timeline */
+.timeline-section {
+    position: relative;
+    padding-left: 30px;
+    max-width: 0px; /* Um pouco mais estreito que o container */
+}
+
+.timeline-section::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: #eaeaea;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 25px;
+    cursor: pointer;
+    padding: 5px 0;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute; left: -34px; top: 12px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #ddd;
+    border: 2px solid #fff;
+    transition: 0.2s;
+}
+
+.timeline-item.active::after {
+    background: #007bff;
+    transform: scale(1.4);
+}
+
+.item-titulo {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #555;
+    margin: 0;
+    transition: 0.2s;
+}
+
+.timeline-item:hover .item-titulo { color: #007bff; }   

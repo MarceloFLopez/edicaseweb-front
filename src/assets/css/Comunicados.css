@@ -1,0 +1,79 @@
+.comunicados-container {
+    max-width: 1200px; /* Maior para tabelas */
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.comunicados-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.comunicados-header h1 {
+    font-size: 2rem;
+    color: #1a1a1a;
+}
+
+/* Tabela Profissional */
+.comunicados-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.comunicados-table th {
+    background: #fbfbfb;
+    color: #888;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.comunicados-table td {
+    padding: 15px;
+    border-bottom: 1px solid #f9f9f9;
+    color: #444;
+    font-size: 14px;
+}
+
+/* Botões Padronizados (use as mesmas classes no Usuarios.css) */
+.btn-novo-comunicado, .btn-salvar {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-novo-comunicado:hover { background: #0056b3; }
+
+.btn-editar-comunicado {
+    background: #f1f1f1;
+    color: #555;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.btn-excluir-comunicado {
+    background: #fff0f0;
+    color: #d9534f;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
