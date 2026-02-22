@@ -1,15 +1,14 @@
 /* Container e Título */
 .usuarios-container {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
+    margin: 40px auto;
+    padding: 0 50px;
 }
-
-.usuarios-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+.usuarios-container h1{
+        font-size: 28px;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 /* Tabela */
@@ -145,12 +144,12 @@
     border: 1px solid #eee;
 }
 
-.input-busca {
-    flex: 1; /* Ocupa o espaço sobrando */
+.input-busca{
+        flex: 1; /* Ocupa o espaço sobrando */
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 14px;
+    margin-right: 10px;
 }
 
 .select-filtro {
@@ -158,5 +157,69 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     background: white;
-    min-width: 150px;
+    min-width: 200px;
+}
+
+/* Alinhamento do Header igual ao de Programação */
+.usuarios-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 20px;
+}
+
+.usuarios-header h1 {
+    margin: 0;
+    color: #333;
+}
+
+/* Agrupamento de Busca, Select e Botão */
+.acoes-header {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Espaço entre os elementos internos */
+}
+
+/* Padronização dos Inputs e Selects */
+.input-busca, .select-filtro-usuarios {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    font-size: 0.9em;
+}
+
+.input-busca {
+    width: 280px;
+}
+
+.select-filtro-usuarios {
+    background-color: white;
+    cursor: pointer;
+}
+
+/* Botão seguindo o padrão btn-novo-comunicado */
+.btn-novo-comunicado {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+}
+
+.btn-novo-comunicado:hover {
+    background-color: #0056b3;
+}
+
+/* Ajuste da Tabela para não ficar colada */
+.table-wrapper {
+    margin-top: 10px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }

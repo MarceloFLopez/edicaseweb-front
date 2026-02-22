@@ -13,14 +13,20 @@ export function Header() {
           <Link to="/home" className="header-link">
             Home
           </Link>
+          <Link to="/programacao" className="header-link">
+              Programação
+          </Link>
+          <Link to="/transacoes" className="header-link">
+            Transações
+          </Link>
           
           {(user?.cargo === "ADMIN" || user?.cargo === "MANAGER") && (
             <>
-              <Link to="/usuarios" className="header-link">
-                Usuários
-              </Link>
               <Link to="/comunicados" className="header-link">
                 Gestão de Comunicados
+              </Link>
+              <Link to="/usuarios" className="header-link">
+                Usuários
               </Link>
             </>
           )}
@@ -28,7 +34,7 @@ export function Header() {
 
         <div className="header-user-area">
           <span className="header-user-info">
-            👤 <strong>{user?.nome}</strong> ({user?.cargo})
+            👤 <strong>{user?.email}</strong> ({user?.cargo})
           </span>
           <button onClick={logout} className="btn-logout">
             Sair

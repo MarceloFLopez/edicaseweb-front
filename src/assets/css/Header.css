@@ -8,8 +8,7 @@
 }
 
 .header-container {
-    max-width: 1100px;
-    margin: 0 auto;
+    margin: 0px 20px 0px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -18,7 +17,7 @@
 
 .header-links {
     display: flex;
-    gap: 20px;
+    gap: 30px;
 }
 
 .header-link {
@@ -26,7 +25,8 @@
     color: #007bff;
     font-weight: 500;
     transition: color 0.2s;
-}
+    font-size: 1.2em;
+    }
 
 .header-link:hover {
     color: #0056b3;

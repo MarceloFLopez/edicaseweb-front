@@ -1,0 +1,226 @@
+.programacao-container {
+  margin: 40px auto;
+  padding: 0 50px;
+}
+
+.sticky-id {
+  width: 10px;
+}
+
+tbody td {
+  width: 50px;
+}
+
+.programacao-container h1 {
+    font-size: 28px;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.btn-novo-programacao {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    margin-left: 30px;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+    white-space: nowrap;
+}
+
+.modal-content {
+  max-height: 90vh;
+  overflow-y: auto;
+  width: 100%;
+  max-width: 800px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-top: 20px;
+}
+
+.programacao-table {
+overflow-x: auto;  /* Habilita o scroll horizontal */
+  max-width: 100%;   /* Garante que o container não ultrapasse a tela */
+  display: block;    /* Garante comportamento de bloco */
+  border: 1px solid #ddd;
+}
+
+.programacao-table th,
+.programacao-table td {
+  white-space: nowrap;
+  padding: 12px 15px;
+}
+
+/* Estilização da barra de scroll para ficar mais bonita (opcional) */
+
+.table-wrapper::-webkit-scrollbar {
+  height: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #007bff;
+}
+
+.sticky-col {
+  position: sticky;
+  right: 0;
+  background-color: white;
+  z-index: 2;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.05);
+}
+
+th.sticky-col {
+  background-color: #f8f9fa;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 500px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.modal-content label {
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn-cancelar {
+  background: #523636;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-salvar {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.input-busca {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-right: 10px;
+  width: 400px;
+}
+
+.container-seletor-colunas {
+  position: relative;
+  display: inline-block;
+}
+
+.btn-colunas {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #444;
+  margin-right: -20px;
+}
+
+.btn-colunas:hover {
+  background: #f8f9fa;
+  border-color: #bbb;
+}
+
+.janela-colunas {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  z-index: 100;
+  background: white;
+  width: 250px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid #eee;
+}
+
+.filtros-grid-checkbox {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 10px;
+}

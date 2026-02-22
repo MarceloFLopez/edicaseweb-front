@@ -1,35 +1,38 @@
 import { useEffect, useState, useContext } from 'react';
 import api from '../services/api';
 import { AuthContext } from '../contexts/AuthContext';
-import '../assets/css/Comunicados.css';
 import { toast } from 'react-toastify';
+import '../assets/css/Comunicados.css';
 
 export function Comunicados() {
   const [comunicados, setComunicados] = useState([]);
   const { user } = useContext(AuthContext);
-
-  // Estados para Modais e Formulários
   const [modalAberto, setModalAberto] = useState(false);
-  const [editando, setEditando] = useState(null); // Armazena o ID do comunicado sendo editado
+  const [editando, setEditando] = useState(null);
   const [form, setForm] = useState({ titulo: '', conteudo: '' });
 
   const carregarComunicados = async () => {
     try {
       const res = await api.get('/comunicados');
-      setComunicados(res.data); // Corrigido: usando setComunicados
+      setComunicados(res.data);
     } catch (err) {
-      console.error("Erro ao carregar comunicados", err);
+      toast.error("Erro ao carregar comunicados"+err);
     }
   };
 
- useEffect(() => {
-    // Definimos uma função assíncrona interna para evitar o chamado síncrono direto
-    const fetchDados = async () => {
-      await carregarComunicados();
-    };
-    
-    fetchDados();
-  }, []); // Mantém o array vazio para rodar apenas uma vez ao montar
+useEffect(() => {
+  let montado = true;
+
+  async function buscarDados() {
+    const res = await api.get('/comunicados');
+    if (montado) {
+      setComunicados(res.data);
+    }
+  }
+
+  buscarDados();
+  return () => { montado = false; }; // Limpeza para evitar vazamento de memória
+}, []);
 
   const handleAbrirModal = (comunicado = null) => {
     if (comunicado) {
@@ -42,103 +45,106 @@ export function Comunicados() {
     setModalAberto(true);
   };
 
+const handleExcluir = async (id) => {
+  // 1. Confirmação para evitar exclusões acidentais
+  if (!window.confirm("Tem certeza que deseja excluir este comunicado? Esta ação não pode ser desfeita.")) {
+    return;
+  }
+
+  try {
+    // 2. Chamada à API
+    await api.delete(`/comunicados/${id}`);
+
+    // 3. Feedback de sucesso
+    toast.success("Comunicado removido com sucesso!");
+
+    // 4. Atualização da lista local (sem precisar recarregar a página toda)
+    setComunicados(prev => prev.filter(item => item.id !== id));
+    
+  } catch (err) {
+    // 5. Tratamento de erro
+    const mensagemErro = err.response?.data?.error || "Erro ao excluir o comunicado.";
+    toast.error(mensagemErro);
+    console.error("Erro na exclusão:", err);
+  }
+};
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (editando) {
-        // Rota de Edição (ajuste conforme seu backend)
         await api.put(`/comunicados/${editando}`, form);
-        toast.success("Comunicado atualizado!");
+        toast.success("Atualizado!");
       } else {
-        // Rota de Criação
         await api.post('/comunicados', form);
-        toast.success("Comunicado criado!");
+        toast.success("Criado!");
       }
       setModalAberto(false);
       carregarComunicados();
     } catch (err) {
-      toast.error("Erro ao salvar: " + (err.response?.data?.error || err.message));
-    }
-  };
-
-  const handleExcluir = async (id) => {
-    if (window.confirm("Deseja realmente excluir este comunicado?")) {
-      try {
-        await api.delete(`/comunicados/${id}`);
-        carregarComunicados();
-      } catch (err) {
-        toast.error("Erro ao excluir: " + err.message);
-      }
+      toast.error("Erro ao salvar."+err);
     }
   };
 
   return (
-    <div className="comunicados-container">
+    <div className="comunicado-container"> {/* Container padrão */}
+     <h1>Gestão de Comunicados</h1>
       <div className="comunicados-header">
-        <h1>Gestão de Comunicados</h1>
-        {(user?.cargo === 'ADMIN' || user?.cargo === 'MANAGER') && (
-          <button className="btn-novo-comunicado" onClick={() => handleAbrirModal()}>
-            + NOVO COMUNICADO
-          </button>
-        )}
+        
+        <div className="acoes-header">
+          {/* O input de busca segue o padrão das outras telas */}
+          <input type="text" placeholder="Filtrar comunicados..." className="input-busca" />
+          
+          {(user?.cargo === 'ADMIN' || user?.cargo === 'MANAGER') && (
+            <button className="btn-novo-comunicado" onClick={() => handleAbrirModal()}>
+              + NOVO COMUNICADO
+            </button>
+          )}
+        </div>
       </div>
 
-      <table className="comunicados-table">
-        <thead>
-          <tr>
-            <th>Título</th>
-            <th>Autor</th>
-            <th>Data</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {comunicados.map((c) => (
-            <tr key={c.id}>
-              <td><strong>{c.titulo}</strong></td>
-              <td><span className="badge-autor">{c.autor}</span></td>
-              <td>{new Date(c.data_criacao).toLocaleDateString()}</td>
-              <td>
-                <div className="acoes-group">
-                  <button className="btn-editar-comunicado" onClick={() => handleAbrirModal(c)}>
-                    Editar
-                  </button>
-                  <button className="btn-excluir-comunicado" onClick={() => handleExcluir(c.id)}>
-                    Excluir
-                  </button>
-                </div>
-              </td>
+      <div className="table-wrapper"> {/* Wrapper padrão para scroll */}
+        <table className="comunicados-table">
+          <thead>
+            <tr>
+              <th>Título</th>
+              <th>Autor</th>
+              <th>Data</th>
+              <th>Ações</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {comunicados.map((c) => (
+              <tr key={c.id}>
+                <td><strong>{c.titulo}</strong></td>
+                <td><span className="badge-permissao">{c.autor}</span></td>
+                <td>{new Date(c.data_criacao).toLocaleDateString()}</td>
+                <td>
+  <div className="acoes-group">
+     <button className="btn-editar-comunicado" onClick={() => handleAbrirModal(c)}>Editar</button>
+     <button className="btn-excluir-comunicado" onClick={() => handleExcluir(c.id)}>Excluir</button>
+  </div>
+</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-      {/* MODAL ÚNICO PARA CRIAR E EDITAR */}
       {modalAberto && (
         <div className="modal-overlay">
           <div className="modal-content">
             <h2>{editando ? "Editar Comunicado" : "Novo Comunicado"}</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
+            <form onSubmit={handleSubmit} className="form-grid">
+              <div className="full-width">
                 <label>Título</label>
-                <input 
-                  type="text" 
-                  required 
-                  value={form.titulo}
-                  onChange={(e) => setForm({...form, titulo: e.target.value})}
-                />
+                <input required value={form.titulo} onChange={e => setForm({...form, titulo: e.target.value})} />
               </div>
-              <div className="form-group">
+              <div className="full-width">
                 <label>Conteúdo</label>
-                <textarea 
-                  required 
-                  rows="5"
-                  style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ddd' }}
-                  value={form.conteudo}
-                  onChange={(e) => setForm({...form, conteudo: e.target.value})}
-                />
+                <textarea required rows="8" value={form.conteudo} onChange={e => setForm({...form, conteudo: e.target.value})} />
               </div>
-              <div className="modal-actions">
+              <div className="modal-actions full-width">
                 <button type="button" className="btn-cancelar" onClick={() => setModalAberto(false)}>Cancelar</button>
                 <button type="submit" className="btn-salvar">Salvar</button>
               </div>

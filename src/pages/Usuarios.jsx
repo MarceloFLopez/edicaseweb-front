@@ -73,13 +73,12 @@ export function Usuarios() {
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm("Tem certeza que deseja excluir?")) {
       try {
         await api.delete(`/deletar-usuario/${id}`);
+        toast.success("Usuário criado com sucesso!");
         carregarUsuarios();
       } catch (err) {
         toast.error("Erro ao excluir: " + (err.response?.data?.message || err.message));
-      }
     }
   };
 
@@ -93,19 +92,14 @@ export function Usuarios() {
   });
 
 return (
+  <div className="usuario-container">
     <div className="usuarios-container">
       {/* 1. Botão movido para dentro do header para alinhar corretamente */}
+       <h1>Gestão de Usuários</h1>
       <div className="usuarios-header">
-        <h1>Gestão de Usuários</h1>
-        {(user?.cargo === 'ADMIN' || user?.cargo === 'MANAGER') && (
-          <button className="btn-novo" onClick={() => setModalAberto(true)}>
-            + NOVO USUÁRIO
-          </button>
-        )}
-      </div>
+       
 
-      {/* --- BARRA DE FILTROS --- */}
-      <div className="filtros-container">
+<div className="acoes-header">
         <input 
           type="text" 
           placeholder="Buscar por nome ou e-mail..." 
@@ -113,8 +107,8 @@ return (
           value={filtroNome}
           onChange={(e) => setFiltroNome(e.target.value)}
         />
-        <select 
-          className="select-filtro"
+<select 
+          className="select-filtro-usuarios"
           value={filtroCargo}
           onChange={(e) => setFiltroCargo(e.target.value)}
         >
@@ -123,7 +117,17 @@ return (
           <option value="MANAGER">MANAGER</option>
           <option value="USER">USER</option>
         </select>
+
+        {(user?.cargo === 'ADMIN' || user?.cargo === 'MANAGER') && (
+          <button className="btn-novo-comunicado" onClick={() => setModalAberto(true)}>
+            + NOVO USUÁRIO
+          </button>
+        )}
+
+
       </div>
+</div>
+
 
       <table className="usuarios-table">
         <thead>
@@ -231,5 +235,7 @@ return (
         </div>
       )}
     </div>
+  </div>
   );
+  
 }

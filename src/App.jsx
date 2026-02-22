@@ -8,6 +8,8 @@ import { Header } from './components/Header';
 import { Comunicados } from './pages/Comunicados';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Programacao } from './pages/Programacao';
+import { Transacoes } from './pages/Transacoes';
 
 function PrivateRoute({ children }) {
   const { authenticated, loading } = useContext(AuthContext);
@@ -31,6 +33,8 @@ export default function App() {
           <Route path="/comunicados" element={<PrivateRoute><Comunicados /></PrivateRoute>} />
           <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
           <Route path="/usuarios" element={<PrivateRoute><Usuarios /></PrivateRoute>} />
+         <Route path="/programacao" element={<PrivateRoute><Programacao /></PrivateRoute>} />
+          <Route path="/transacoes" element={<PrivateRoute><Transacoes /></PrivateRoute>} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
