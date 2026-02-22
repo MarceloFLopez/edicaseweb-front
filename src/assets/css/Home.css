@@ -1,124 +1,196 @@
-.home-container {
-    max-width: 1200px; /* Maior para tabelas */
+.home-wrapper {
     margin: 40px auto;
-    padding: 0 20px;
+    padding: 0 50px;
 }
 
-/* DESTAQUE PRINCIPAL */
-.main-highlight {
-    background: #ffffff;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.04);
-    margin-bottom: 50px;
-    border: 1px solid #f0f0f0;
-}
 
-.card-tag-destaque {
-    color: #007bff;
+
+.home-header h1 {
+   font-size: 28px;
+    color: #2c3e50;
+    margin-bottom: 30px;
     font-weight: 700;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-    display: block;
+    letter-spacing: -0.5px;
 }
 
-.main-highlight h1 {
-    font-size: 2.2rem;
-    color: #1a1a1a;
+.home-header p {
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Layout de Duas Colunas */
+.home-content-layout {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+/* Área de Leitura (65%) */
+.reading-area {
+    flex: 1; 
+    min-width: 0; /* Evita que o conteúdo quebre o layout flex */
+}
+
+.main-highlight-card {
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+}
+
+.card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
+}
+
+.card-tag {
+    background: #ebf5ff;
+    color: #007bff;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.main-highlight-card h1 {
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+    color: #1a202c;
     line-height: 1.2;
 }
 
-.main-content {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: #4a4a4a;
+.main-content-body {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #333;
     white-space: pre-wrap;
 }
 
-.home-container {
-    max-width: 800px; /* Padrão de leitura focada */
-    margin: 40px auto;
-    padding: 0 20px;
+/* Rodapé do Card com Autor */
+.main-footer {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid #eee;
 }
 
-.main-highlight {
-    background: #ffffff;
-    padding: 40px;
-    border-radius: 16px; /* Arredondamento suave padronizado */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    margin-bottom: 50px;
-    border: 1px solid #f0f0f0;
+.author-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-.card-tag-destaque {
-    color: #007bff;
-    font-weight: 700;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 12px;
-    display: block;
-}
-
-.main-highlight h1 {
-    font-size: 2rem;
-    color: #1a1a1a;
-    margin: 0 0 20px 0;
-    line-height: 1.3;
-}
-
-.main-content {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: #444;
-    white-space: pre-wrap;
-}
-
-/* Timeline */
-.timeline-section {
-    position: relative;
-    padding-left: 30px;
-    max-width: 0px; /* Um pouco mais estreito que o container */
-}
-
-.timeline-section::before {
-    content: '';
-    position: absolute; left: 0; top: 0; bottom: 0;
-    width: 2px;
-    background: #eaeaea;
-}
-
-.timeline-item {
-    position: relative;
-    margin-bottom: 25px;
-    cursor: pointer;
-    padding: 5px 0;
-}
-
-.timeline-item::after {
-    content: '';
-    position: absolute; left: -34px; top: 12px;
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: #ddd;
-    border: 2px solid #fff;
-    transition: 0.2s;
-}
-
-.timeline-item.active::after {
+.author-avatar {
+    width: 45px;
+    height: 45px;
     background: #007bff;
-    transform: scale(1.4);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
 }
 
-.item-titulo {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #555;
+.author-name {
+    font-weight: 700;
     margin: 0;
-    transition: 0.2s;
+    color: #2d3748;
 }
 
-.timeline-item:hover .item-titulo { color: #007bff; }   
+.author-label {
+    font-size: 0.8rem;
+    color: #718096;
+    margin: 0;
+}
+
+/* Sidebar (35%) */
+.timeline-sidebar {
+    width: 320px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 20px;
+    max-height: calc(100vh - 100px); 
+    display: flex;
+    flex-direction: column;
+}
+
+.timeline-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* Habilita a rolagem apenas nesta área */
+    overflow-y: auto; 
+    padding-right: 10px; /* Espaço para a barra não cobrir o texto */
+}
+
+/* Customização da barra de rolagem para ficar elegante e fina */
+.timeline-container::-webkit-scrollbar {
+    width: 6px;
+}
+.timeline-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.timeline-container::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 10px;
+}
+
+.timeline-container::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+}
+.timeline-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.timeline-card:hover {
+    border-color: #007bff;
+    background: #f8fbff;
+}
+
+.timeline-card.active {
+    border-left: 4px solid #007bff;
+    background: #f0f7ff;
+}
+
+.timeline-date {
+    font-size: 0.75rem;
+    color: #a0aec0;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.timeline-card h4 {
+    font-size: 0.95rem;
+    color: #2d3748;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    .home-wrapper {
+        width: 95%; /* Em tablets, ocupa um pouco mais */
+    }
+    
+    .home-content-layout {
+        flex-direction: column; /* Empilha as colunas em telas pequenas */
+    }
+
+    .timeline-sidebar {
+        width: 100%;
+        position: static;
+    }
+}

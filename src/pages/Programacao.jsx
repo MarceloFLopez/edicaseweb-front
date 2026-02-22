@@ -3,6 +3,7 @@ import api from '../services/api';
 import { toast } from 'react-toastify';
 import '../assets/css/Programacao.css';
 import { CATEGORIAS, CONFIG_COLUNAS } from './programacaoConfig';
+import { useRef } from 'react';
 
 export function Programacao() {
   const [lista, setLista] = useState([]);
@@ -19,7 +20,8 @@ export function Programacao() {
     prazo_entrega: '',
     descricao: ''
   });
-
+  const seletorRef = useRef(null);
+  const [buscaColuna, setBuscaColuna] = useState('');
   const carregarProgramacao = async () => {
     try {
       setLoading(true);
@@ -31,6 +33,23 @@ export function Programacao() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+  function handleClickFora(event) {
+    // Se a janela estiver aberta e o clique NÃO for dentro do container do seletor
+    if (seletorRef.current && !seletorRef.current.contains(event.target)) {
+      setMostrarOpcoesColunas(false);
+    }
+  }
+
+  // Adiciona o evento ao carregar
+  document.addEventListener("mousedown", handleClickFora);
+  
+  // Limpa o evento ao fechar o componente para não pesar a memória
+  return () => {
+    document.removeEventListener("mousedown", handleClickFora);
+  };
+}, [mostrarOpcoesColunas]);
 
   useEffect(() => { carregarProgramacao(); }, []);
 
@@ -66,6 +85,7 @@ export function Programacao() {
       prev.includes(cat) ? prev.filter(c => c !== cat) : [...prev, cat]
     );
   };
+  
 
   const colunasExibidas = CONFIG_COLUNAS.filter(col => categoriasAtivas.includes(col.categoria));
   const dadosFiltrados = lista.filter(item => 
@@ -74,7 +94,7 @@ export function Programacao() {
 
   return (
     <div className="programacao-container">
-      <div className="programacao-header">
+      <div className="programacao-hewader">
         <h1>Programação Editorial</h1>
 
       </div>
@@ -89,7 +109,7 @@ export function Programacao() {
       onChange={(e) => setBusca(e.target.value)}
     />
     
-    <div className="container-seletor-colunas">
+    <div className="container-seletor-colunas" ref={seletorRef}>
       <button 
         className="btn-colunas" 
         onClick={() => setMostrarOpcoesColunas(!mostrarOpcoesColunas)}
@@ -98,22 +118,52 @@ export function Programacao() {
       </button>
 
       {mostrarOpcoesColunas && (
-        <div className="janela-colunas">
-          <span className="filtros-label">Marque para ESCONDER:</span>
-          <div className="filtros-grid-checkbox">
-            {CATEGORIAS.map(cat => (
-              <label key={cat} className="checkbox-item-ocultar">
-                <input 
-                  type="checkbox" 
-                  // Agora ele está checado se a categoria NÃO está ativa
-                  checked={!categoriasAtivas.includes(cat)}
-                  onChange={() => toggleCategoria(cat)}
-                />
-                <span className="checkbox-label">{cat}</span>
-              </label>
-            ))}
-          </div>
-        </div>
+<div className="janela-colunas">
+    <span className="filtros-label">Gerenciar Colunas</span>
+    
+    {/* 1. Campo de Busca */}
+    <input 
+      type="text"
+      placeholder="Buscar coluna..."
+      className="input-busca-colunas-interna"
+      value={buscaColuna}
+      onChange={(e) => setBuscaColuna(e.target.value)}
+    />
+
+    <div className="filtros-grid-checkbox">
+      {/* 2. Marcar/Desmarcar Todos */}
+      <label className="checkbox-item-ocultar select-all">
+        <input 
+          type="checkbox" 
+          checked={categoriasAtivas.length === 0} // Se nada está ativo, "Ocultar Tudo" está marcado
+          onChange={() => {
+            if (categoriasAtivas.length === 0) {
+              setCategoriasAtivas(CATEGORIAS); // Mostra tudo
+            } else {
+              setCategoriasAtivas([]); // Oculta tudo
+            }
+          }}
+        />
+        <span className="checkbox-label" style={{fontWeight: 'bold'}}>OCULTAR TUDO</span>
+      </label>
+
+      <hr className="divisor-colunas" />
+
+      {/* 3. Lista Filtrada */}
+      {CATEGORIAS
+        .filter(cat => cat.toLowerCase().includes(buscaColuna.toLowerCase()))
+        .map(cat => (
+          <label key={cat} className="checkbox-item-ocultar">
+            <input 
+              type="checkbox" 
+              checked={!categoriasAtivas.includes(cat)}
+              onChange={() => toggleCategoria(cat)}
+            />
+            <span className="checkbox-label">{cat}</span>
+          </label>
+      ))}
+    </div>
+  </div>
       )}
     </div>
 
@@ -130,6 +180,7 @@ export function Programacao() {
               {colunasExibidas.map(col => (
                 <th key={col.chave}>{col.label}</th>
               ))}
+              
             </tr>
           </thead>
           <tbody>

@@ -1,4 +1,26 @@
 export const CONFIG_COLUNAS = [
+
+
+  {chave: 'edicao', label: 'Edição', tipo: 'text', categoria: 'Básico'},
+  { chave: 'data_pdf', label: 'Data PDF', tipo: 'date', categoria: 'Básico' },
+  { chave: 'prazo_entrega', label: 'Prazo de Entrega', tipo: 'date', categoria: 'Básico' },
+  { chave: 'descricao', label: 'Descrição', tipo: 'textarea', categoria: 'Básico' },
+  { chave: 'chamada_principal', label: 'Chamada Principal', tipo: 'textarea', categoria: 'Básico' },
+  { chave: 'descricao_edicao', label: 'Descrição Edição', tipo: 'textarea', categoria: 'Básico' },
+  { chave: 'palavra_chave', label: 'Palavra Chave', tipo: 'text', categoria: 'Básico' },
+  { chave: 'autor', label: 'Autor', tipo: 'text', categoria: 'Básico' },
+  { chave: 'numero_paginas', label: 'Número de Páginas', tipo: 'number', categoria: 'Básico' },
+  { chave: 'codigo_barra', label: 'Código de Barra', tipo: 'text', categoria: 'Básico' },
+  { chave: 'ean', label: 'EAN', tipo: 'text', categoria: 'Básico' },
+  { chave: 'isbn', label: 'ISBN', tipo: 'text', categoria: 'Básico' },
+  { chave: 'bisac', label: 'BISAC', tipo: 'text', categoria: 'Básico' },
+  { chave: 'descricao_bisac', label: 'Descrição BISAC', tipo: 'textarea', categoria: 'Básico' },
+  { chave: 'cate', label: 'Categoria', tipo: 'text', categoria: 'Básico' },
+ { chave: 'sub_categoria', label: 'Sub Categoria', tipo: 'text', categoria: 'Básico' },
+ { chave: 'editora', label: 'Editora', tipo: 'text', categoria: 'Básico' },
+ { chave: 'periodicidade', label: 'Periodicidade', tipo: 'text', categoria: 'Básico' },
+ { chave: 'observacoes', label: 'Observações', tipo: 'textarea', categoria: 'Básico' },
+  
   { chave: 'google_negocios_digital', label: 'Google Negócios Digital', tipo: 'text', categoria: 'Google Negócios' },
   { chave: 'google_negocios_impresso', label: 'Google Negócios Impresso', tipo: 'text', categoria: 'Google Negócios' },
   { chave: 'via_varejo_impresso', label: 'Via Varejo Impresso', tipo: 'text', categoria: 'Via Varejo' },

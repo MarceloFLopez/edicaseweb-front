@@ -103,7 +103,7 @@ return (
         <input 
           type="text" 
           placeholder="Buscar por nome ou e-mail..." 
-          className="input-busca"
+          className="filtro-busca"
           value={filtroNome}
           onChange={(e) => setFiltroNome(e.target.value)}
         />

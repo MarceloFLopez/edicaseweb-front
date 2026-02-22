@@ -7,8 +7,29 @@
   width: 10px;
 }
 
+th.sticky-col {
+    background-color: #f8fafc !important; 
+    border-bottom: 2px solid #e2e8f0;
+}
+
 tbody td {
   width: 50px;
+}
+
+.programacao-table thead {
+    background-color: #f8fafc; /* Fundo neutro claro igual aos outros */
+    border-bottom: 2px solid #e2e8f0;
+}
+.programacao-table th {
+    padding: 16px 20px;
+    text-align: left;
+    color: #64748b;         /* Cinza azulado padrão */
+    font-size: 12px;        /* Tamanho padrão labels */
+    font-weight: 700;       /* Negrito forte */
+    text-transform: uppercase; 
+    letter-spacing: 0.05em; 
+    white-space: nowrap;
+    /* Mantém a compatibilidade com o seu sticky original se houver */
 }
 
 .programacao-container h1 {
@@ -52,13 +73,12 @@ tbody td {
 }
 
 .table-wrapper {
-  width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  margin-top: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    margin-top: 25px;
+    border: 1px solid #f0f0f0;
 }
 
 .programacao-table {
@@ -223,4 +243,56 @@ th.sticky-col {
   max-height: 300px;
   overflow-y: auto;
   margin-top: 10px;
+}
+
+
+/* Input de busca dentro do seletor */
+.input-busca-colunas-interna {
+    width: 80%;
+    padding: 8px 12px;
+    margin: 10px 0;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 13px;
+    outline: none;
+}
+
+.input-busca-colunas-interna:focus {
+    border-color: #3b82f6;
+}
+
+/* Divisor entre o "Todos" e a lista */
+.divisor-colunas {
+    border: 0;
+    border-top: 1px solid #e2e8f0;
+    margin: 8px 0;
+}
+
+/* Estilo para cada item de checkbox */
+.checkbox-item-ocultar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-radius: 4px;
+}
+
+.checkbox-item-ocultar:hover {
+    background-color: #f8fafc;
+}
+
+.checkbox-label {
+    font-size: 13px;
+    color: #475569;
+}
+
+/* Label de instrução superior */
+.filtros-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #94a3b8;
+    letter-spacing: 0.05em;
 }
