@@ -3,6 +3,7 @@ import api from '../services/api';
 import { AuthContext } from '../contexts/AuthContext';
 import { toast } from 'react-toastify';
 import '../assets/css/Comunicados.css';
+import Swal from 'sweetalert2';
 
 export function Comunicados() {
   const [comunicados, setComunicados] = useState([]);
@@ -45,9 +46,45 @@ useEffect(() => {
     setModalAberto(true);
   };
 
+// const handleExcluir = async (id) => {
+//   // 1. Confirmação para evitar exclusões acidentais
+//   if (!window.confirm("Tem certeza que deseja excluir este comunicado? Esta ação não pode ser desfeita.")) {
+//     return;
+//   }
+
+//   try {
+//     // 2. Chamada à API
+//     await api.delete(`/comunicados/${id}`);
+
+//     // 3. Feedback de sucesso
+//     toast.success("Comunicado removido com sucesso!");
+
+//     // 4. Atualização da lista local (sem precisar recarregar a página toda)
+//     setComunicados(prev => prev.filter(item => item.id !== id));
+    
+//   } catch (err) {
+//     // 5. Tratamento de erro
+//     const mensagemErro = err.response?.data?.error || "Erro ao excluir o comunicado.";
+//     toast.error(mensagemErro);
+//     console.error("Erro na exclusão:", err);
+//   }
+// };
+
 const handleExcluir = async (id) => {
-  // 1. Confirmação para evitar exclusões acidentais
-  if (!window.confirm("Tem certeza que deseja excluir este comunicado? Esta ação não pode ser desfeita.")) {
+  // 1. Substituição do window.confirm pelo SweetAlert2
+  const result = await Swal.fire({
+    title: 'Tem certeza?',
+    text: "Esta ação não pode ser desfeita!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Sim, excluir!',
+    cancelButtonText: 'Cancelar'
+  });
+
+  // Se o usuário clicar em cancelar, interrompemos a função
+  if (!result.isConfirmed) {
     return;
   }
 
@@ -55,10 +92,10 @@ const handleExcluir = async (id) => {
     // 2. Chamada à API
     await api.delete(`/comunicados/${id}`);
 
-    // 3. Feedback de sucesso
+    // 3. Feedback de sucesso (Aqui você continua usando seu toast atual)
     toast.success("Comunicado removido com sucesso!");
 
-    // 4. Atualização da lista local (sem precisar recarregar a página toda)
+    // 4. Atualização da lista local
     setComunicados(prev => prev.filter(item => item.id !== id));
     
   } catch (err) {
@@ -93,7 +130,7 @@ const handleExcluir = async (id) => {
         
         <div className="acoes-header">
           {/* O input de busca segue o padrão das outras telas */}
-          <input type="text" placeholder="Filtrar comunicados..." className="input-busca" />
+          <input type="text" placeholder="Filtrar comunicados..." className="busca" />
           
           {(user?.cargo === 'ADMIN' || user?.cargo === 'MANAGER') && (
             <button className="btn-novo-comunicado" onClick={() => handleAbrirModal()}>

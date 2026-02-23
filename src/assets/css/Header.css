@@ -25,7 +25,8 @@
     color: #007bff;
     font-weight: 500;
     transition: color 0.2s;
-    font-size: 1.2em;
+    font-size: 1.6em;
+    margin-right: 20px;
     }
 
 .header-link:hover {
@@ -45,15 +46,19 @@
 
 .btn-logout {
     background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 500;
+ color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
     transition: background-color 0.2s;
+    text-transform: uppercase;
 }
 
+
+
+
 .btn-logout:hover {
-    background-color: #c82333;
+    background-color: #f7051d;
 }

@@ -17,13 +17,13 @@ export function Header() {
               Programação
           </Link>
           <Link to="/transacoes" className="header-link">
-            Transações
+            Pagamentos
           </Link>
           
           {(user?.cargo === "ADMIN" || user?.cargo === "MANAGER") && (
             <>
               <Link to="/comunicados" className="header-link">
-                Gestão de Comunicados
+                Comunicados
               </Link>
               <Link to="/usuarios" className="header-link">
                 Usuários

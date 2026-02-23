@@ -6,57 +6,56 @@
 .sticky-id {
   width: 10px;
 }
-
-th.sticky-col {
-    background-color: #f8fafc !important; 
-    border-bottom: 2px solid #e2e8f0;
+.sticky-titulo {
+  min-width: 400px;
 }
 
-tbody td {
-  width: 50px;
+th.sticky-col {
+  background-color: #f8fafc !important;
+  border-bottom: 2px solid #e2e8f0;
 }
 
 .programacao-table thead {
-    background-color: #f8fafc; /* Fundo neutro claro igual aos outros */
-    border-bottom: 2px solid #e2e8f0;
+  background-color: #f8fafc; /* Fundo neutro claro igual aos outros */
+  border-bottom: 2px solid #e2e8f0;
 }
 .programacao-table th {
-    padding: 16px 20px;
-    text-align: left;
-    color: #64748b;         /* Cinza azulado padrão */
-    font-size: 12px;        /* Tamanho padrão labels */
-    font-weight: 700;       /* Negrito forte */
-    text-transform: uppercase; 
-    letter-spacing: 0.05em; 
-    white-space: nowrap;
-    /* Mantém a compatibilidade com o seu sticky original se houver */
+  padding: 16px 20px;
+  text-align: left;
+  color: #64748b; /* Cinza azulado padrão */
+  font-size: 12px; /* Tamanho padrão labels */
+  font-weight: 700; /* Negrito forte */
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  /* Mantém a compatibilidade com o seu sticky original se houver */
 }
 
 .programacao-container h1 {
-    font-size: 28px;
-    color: #2c3e50;
-    margin-bottom: 30px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
+  font-size: 28px;
+  color: #2c3e50;
+  margin-bottom: 30px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .btn-novo-programacao {
-    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
-    color: white;
-    margin-left: 30px;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
-    white-space: nowrap;
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  margin-left: 30px;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+  white-space: nowrap;
 }
 
 .modal-content {
-  max-height: 90vh;
+  max-height: 100vh;
   overflow-y: auto;
   width: 100%;
   max-width: 800px;
@@ -73,18 +72,18 @@ tbody td {
 }
 
 .table-wrapper {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    margin-top: 25px;
-    border: 1px solid #f0f0f0;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  margin-top: 25px;
+  border: 1px solid #f0f0f0;
 }
 
 .programacao-table {
-overflow-x: auto;  /* Habilita o scroll horizontal */
-  max-width: 100%;   /* Garante que o container não ultrapasse a tela */
-  display: block;    /* Garante comportamento de bloco */
+  overflow-x: auto; /* Habilita o scroll horizontal */
+  max-width: 100%; /* Garante que o container não ultrapasse a tela */
+  display: block; /* Garante comportamento de bloco */
   border: 1px solid #ddd;
 }
 
@@ -141,9 +140,9 @@ th.sticky-col {
 
 .modal-content {
   background: white;
-  padding: 30px;
+  padding: 20px;
   border-radius: 12px;
-  width: 500px;
+  width: 800px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
@@ -162,7 +161,7 @@ th.sticky-col {
 
 .modal-content input,
 .modal-content textarea {
-  width: 100%;
+  width: 95%;
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ddd;
@@ -194,12 +193,13 @@ th.sticky-col {
 }
 
 .input-busca {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  margin-right: 10px;
-  width: 400px;
+  width: 500px;
+  padding: 12px 16px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  outline: none;
 }
 
 .container-seletor-colunas {
@@ -216,6 +216,7 @@ th.sticky-col {
   font-weight: 500;
   color: #444;
   margin-right: -20px;
+  margin-left: 15px;
 }
 
 .btn-colunas:hover {
@@ -245,54 +246,53 @@ th.sticky-col {
   margin-top: 10px;
 }
 
-
 /* Input de busca dentro do seletor */
 .input-busca-colunas-interna {
-    width: 80%;
-    padding: 8px 12px;
-    margin: 10px 0;
-    border: 1.5px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 13px;
-    outline: none;
+  width: 80%;
+  padding: 8px 12px;
+  margin: 10px 0;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 13px;
+  outline: none;
 }
 
 .input-busca-colunas-interna:focus {
-    border-color: #3b82f6;
+  border-color: #3b82f6;
 }
 
 /* Divisor entre o "Todos" e a lista */
 .divisor-colunas {
-    border: 0;
-    border-top: 1px solid #e2e8f0;
-    margin: 8px 0;
+  border: 0;
+  border-top: 1px solid #e2e8f0;
+  margin: 8px 0;
 }
 
 /* Estilo para cada item de checkbox */
 .checkbox-item-ocultar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 6px 4px;
-    cursor: pointer;
-    transition: background 0.2s;
-    border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-radius: 4px;
 }
 
 .checkbox-item-ocultar:hover {
-    background-color: #f8fafc;
+  background-color: #f8fafc;
 }
 
 .checkbox-label {
-    font-size: 13px;
-    color: #475569;
+  font-size: 13px;
+  color: #475569;
 }
 
 /* Label de instrução superior */
 .filtros-label {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #94a3b8;
-    letter-spacing: 0.05em;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #94a3b8;
+  letter-spacing: 0.05em;
 }

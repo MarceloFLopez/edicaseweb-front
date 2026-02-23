@@ -194,7 +194,7 @@ export function Transacoes() {
                <input type="number" step="0.01" placeholder="Valor" required value={novaTransacao.valor} onChange={e => setNovaTransacao({...novaTransacao, valor: e.target.value})} />
                {/* Adicione os outros campos conforme necessário */}
                <div className="modal-actions">
-                 <button type="button" onClick={() => setModalAberto(false)}>Cancelar</button>
+                 <button type="button"className="btn-cancelar" onClick={() => setModalAberto(false)}>Cancelar</button>
                  <button type="submit" className="btn-salvar">Salvar</button>
                </div>
             </form>

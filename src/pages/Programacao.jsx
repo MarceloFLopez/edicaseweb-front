@@ -190,6 +190,7 @@ export function Programacao() {
                 <td className="sticky-titulo">
                   <EditableCell 
                     valor={item.titulo} 
+                    type='text'
                     onSave={(v) => handleUpdateInline(item.id, 'titulo', item.titulo, v)} 
                   />
                 </td>
