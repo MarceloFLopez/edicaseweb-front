@@ -40,7 +40,6 @@ export function Header() {
               <Link to="/programacao" className="header-link">Programação</Link>
               <Link to="/transacoes" className="header-link">Pagamentos</Link>
               <Link to="/comunicados" className="header-link">Comunicados</Link>
-              <Link to="/usuarios" className="header-link">Usuários</Link>
             </>
           )}
 
