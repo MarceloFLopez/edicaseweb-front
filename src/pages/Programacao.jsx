@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import '../assets/css/Programacao.css';
 import { CATEGORIAS, CONFIG_COLUNAS } from './programacaoConfig';
 import { useRef } from 'react';
+import Swal from 'sweetalert2';
 
 export function Programacao() {
   const [lista, setLista] = useState([]);
@@ -53,20 +54,36 @@ export function Programacao() {
 
   useEffect(() => { carregarProgramacao(); }, []);
 
-  const handleSalvarNovo = async (e) => {
-    e.preventDefault();
-    try {
-      const dadosParaEnviar = { ...novoItem, edicao: Number(novoItem.edicao) };
-      const res = await api.post('/programacao', dadosParaEnviar);
-      
-      toast.success("Programação criada!");
-      setLista([res.data, ...lista]); 
-      setModalAberto(false);
-      setNovoItem({ titulo: '', edicao: '', data_pdf: '', prazo_entrega: '', descricao: '' });
-    } catch (err) {
-      toast.error("Erro ao criar nova programação."+err);
-    }
-  };
+ const handleSalvarNovo = async (e) => {
+  e.preventDefault();
+  try {
+    const dadosParaEnviar = { ...novoItem, edicao: Number(novoItem.edicao) };
+    
+    // 1. Envia os dados para o backend
+    await api.post('/programacao', dadosParaEnviar);
+    
+    // 2. Exibe o alerta de sucesso
+    await Swal.fire({
+      icon: 'success',
+      title: 'Criado!',
+      text: 'A programação foi criada com sucesso.',
+      timer: 1500,
+      showConfirmButton: false
+    });
+
+    // 3. Fecha o modal e recarrega a página
+    setModalAberto(false);
+    window.location.reload(); // <--- Aqui acontece o recarregamento
+
+  } catch (err) {
+    console.error(err);
+    Swal.fire({
+      icon: 'error',
+      title: 'Erro!',
+      text: err.response?.data?.message || "Erro ao criar nova programação."
+    });
+  }
+};
 
   const handleUpdateInline = async (id, campo, valorOriginal, novoValor) => {
     if (valorOriginal === novoValor) return;
@@ -79,6 +96,52 @@ export function Programacao() {
       carregarProgramacao();
     }
   };
+
+
+const handleDelete = async (id) => {
+  // 1. Substitui o window.confirm pelo SweetAlert2
+  const resultado = await Swal.fire({
+    title: 'Deseja realmente excluir?',
+    text: "Esta ação não poderá ser desfeita!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Sim, excluir!',
+    cancelButtonText: 'Cancelar'
+  });
+
+  // Se o usuário clicou em cancelar, interrompe a função
+  if (!resultado.isConfirmed) return;
+
+  try {
+    // 2. Chama a API para deletar
+    await api.delete(`/programacao/${id}`);
+    
+    // 3. Exibe o alerta de sucesso
+    await Swal.fire({
+      icon: 'success',
+      title: 'Excluído!',
+      text: 'O registro foi removido com sucesso.',
+      timer: 1500,
+      showConfirmButton: false
+    });
+
+    // 4. Recarrega a página para atualizar todos os dados
+    window.location.reload();
+
+  } catch (err) {
+    const msgErro = err.response?.data?.message || "Erro ao excluir o registro";
+    
+    Swal.fire({
+      icon: 'error',
+      title: 'Erro!',
+      text: msgErro
+    });
+    
+    console.error("Erro detalhado:", err);
+  }
+};
 
   const toggleCategoria = (cat) => {
     setCategoriasAtivas(prev => 
@@ -173,19 +236,23 @@ export function Programacao() {
 
       <div className="table-wrapper">
         <table className="programacao-table">
-          <thead>
-            <tr>
-              <th className="sticky-id">#</th>
-              <th className="sticky-titulo">Título</th>
-              {colunasExibidas.map(col => (
-                <th key={col.chave}>{col.label}</th>
-              ))}
-              
-            </tr>
-          </thead>
+<thead>
+  <tr>
+    {/* Nova coluna de ação antes do # */}
+    <th style={{ width: '50px' }}>Ações</th> 
+    <th className="sticky-id">#</th>
+    <th className="sticky-titulo">Título</th>
+    {colunasExibidas.map(col => (
+      <th key={col.chave}>{col.label}</th>
+    ))}
+  </tr>
+</thead>
           <tbody>
             {!loading && dadosFiltrados.map(item => (
               <tr key={item.id}>
+                <td className="acoes-cell">
+                  <button className="btn-acao" onClick={() => handleDelete(item.id)}>🗑️</button>
+                </td>
                 <td className="sticky-id">{item.id}</td>
                 <td className="sticky-titulo">
                   <EditableCell 

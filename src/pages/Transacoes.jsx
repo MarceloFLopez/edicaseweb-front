@@ -3,6 +3,7 @@ import api from '../services/api';
 import { AuthContext } from '../contexts/AuthContext';
 import '../assets/css/Transacoes.css';
 import { toast } from 'react-toastify';
+import Swal from 'sweetalert2'; // Importação do SweetAlert2
 
 export function Transacoes() {
   const [lista, setLista] = useState([]);
@@ -12,7 +13,6 @@ export function Transacoes() {
     data: '', plataforma: '', intermediador: '', banco: '', valor: '', prazo: ''
   });
 
-  // Mantivemos apenas o que é necessário para os novos filtros
   const [filtroBanco, setFiltroBanco] = useState('');
   const [buscaPlataforma, setBuscaPlataforma] = useState('');
 
@@ -54,27 +54,46 @@ export function Transacoes() {
     }
   };
 
+  // FUNÇÃO DE EXCLUSÃO ATUALIZADA COM SWEETALERT2 E RECARREGAMENTO
   const handleDelete = async (id) => {
-    if (!window.confirm("Excluir transação?")) return;
-    try {
-      await api.delete(`/transacoes/${id}`);
-      setLista(prev => prev.filter(t => t.id !== id));
-      toast.success("Excluído!");
-    } catch (err) {
-      toast.error("Erro ao excluir." + err.message);
+    const resultado = await Swal.fire({
+      title: 'Deseja excluir?',
+      text: "Esta transação será removida permanentemente!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sim, excluir!',
+      cancelButtonText: 'Cancelar'
+    });
+
+    if (resultado.isConfirmed) {
+      try {
+        await api.delete(`/transacoes/${id}`);
+        
+        await Swal.fire({
+          icon: 'success',
+          title: 'Excluído!',
+          text: 'A transação foi removida.',
+          timer: 1500,
+          showConfirmButton: false
+        });
+
+        // Recarrega a página conforme solicitado
+        window.location.reload(); 
+      } catch (err) {
+        Swal.fire('Erro!', 'Não foi possível excluir: ' + err.message, 'error');
+      }
     }
   };
   
   const bancosDisponiveis = [...new Set(lista.map(t => t.banco).filter(Boolean))].sort();
-  // LOGICA DE FILTRO UNIFICADA (Barra de Busca + Select de Banco)
+  
   const transacoesFiltradas = lista.filter(t => {
     const batePlataforma = t.plataforma.toLowerCase().includes(buscaPlataforma.toLowerCase());
     const bateBanco = filtroBanco === '' || t.banco === filtroBanco;
     return batePlataforma && bateBanco;
   });
-
-
-
 
   return (
     <div className="transacao-container">
@@ -82,7 +101,6 @@ export function Transacoes() {
         <h1>Gestão de Transações</h1>
         
         <div className="acoes-header" style={{ display: 'flex', gap: '15px', marginBottom: '20px' }}>
-          {/* BARRA DE BUSCA POR TEXTO */}
           <input 
             type="text" 
             className="input-busca-transacoes" 
@@ -91,44 +109,45 @@ export function Transacoes() {
             onChange={(e) => setBuscaPlataforma(e.target.value)}
           />
 
-
-
           <select
-          className="select-filtro-transacoes"
+            className="select-filtro-transacoes"
             value={filtroBanco}
             onChange={(e) => setFiltroBanco(e.target.value)}
           >
             <option value="">Todos os Bancos</option>
             {bancosDisponiveis.map((banco) => (
-              <option key={banco} value={banco}>
-                {banco}
-              </option>
+              <option key={banco} value={banco}>{banco}</option>
             ))}
           </select>
 
-          {(user?.cargo === 'ADMIN' || user?.cargo === 'MANAGER') && (
-            <button className="btn-novo-comunicado" onClick={() => setModalAberto(true)}>
-              + NOVA TRANSAÇÃO
-            </button>
-          )}
+          <button className="btn-novo-comunicado" onClick={() => setModalAberto(true)}>
+            + NOVA TRANSAÇÃO
+          </button>
         </div>
 
         <div className="table-wrapper">
           <table className="transacoes-table">
             <thead>
               <tr>
+                {/* COLUNA DE AÇÃO NO INÍCIO */}
+                <th style={{ width: '50px' }}>Ação</th>
                 <th>Data</th>
                 <th>Plataforma</th>
                 <th>Intermediador</th>
                 <th>Banco</th>
                 <th>Valor</th>
                 <th>Prazo</th>
-                <th style={{ width: '80px' }}>Ações</th>
               </tr>
             </thead>
             <tbody>
               {transacoesFiltradas.map((t) => (
                 <tr key={t.id}>
+                  {/* BOTÃO DE EXCLUIR NO INÍCIO (Restrito a ADMIN/MANAGER se desejar) */}
+                  <td style={{ textAlign: 'center' }}>
+                    {(user?.cargo === 'ADMIN' || user?.cargo === 'MANAGER') && (
+                      <button onClick={() => handleDelete(t.id)} className="btn-excluir-linha">🗑️</button>
+                    )}
+                  </td>
                   <td>
                     <EditableCell 
                       valor={t.data} 
@@ -167,11 +186,6 @@ export function Transacoes() {
                       onSave={(v) => handleUpdateInline(t.id, 'prazo', t.prazo, v)} 
                     />
                   </td>
-                  <td style={{ textAlign: 'center' }}>
-                    {user?.cargo === 'ADMIN' && (
-                      <button onClick={() => handleDelete(t.id)} className="btn-excluir-linha">🗑️</button>
-                    )}
-                  </td>
                 </tr>
               ))}
             </tbody>
@@ -182,19 +196,17 @@ export function Transacoes() {
         </div>
       </div>
 
-      {/* MODAL DE CADASTRO (Simplificado para o exemplo) */}
       {modalAberto && (
         <div className="modal-overlay">
           <div className="modal-content">
             <h2>Nova Transação</h2>
             <form onSubmit={handleCriarTransacao} className="form-grid">
-               {/* Seus inputs de cadastro aqui... */}
                <input type="date" required value={novaTransacao.data} onChange={e => setNovaTransacao({...novaTransacao, data: e.target.value})} />
                <input type="text" placeholder="Plataforma" required value={novaTransacao.plataforma} onChange={e => setNovaTransacao({...novaTransacao, plataforma: e.target.value})} />
                <input type="number" step="0.01" placeholder="Valor" required value={novaTransacao.valor} onChange={e => setNovaTransacao({...novaTransacao, valor: e.target.value})} />
-               {/* Adicione os outros campos conforme necessário */}
+               
                <div className="modal-actions">
-                 <button type="button"className="btn-cancelar" onClick={() => setModalAberto(false)}>Cancelar</button>
+                 <button type="button" className="btn-cancelar" onClick={() => setModalAberto(false)}>Cancelar</button>
                  <button type="submit" className="btn-salvar">Salvar</button>
                </div>
             </form>
@@ -205,6 +217,7 @@ export function Transacoes() {
   );
 }
 
+// EditableCell permanece igual...
 function EditableCell({ valor, onSave, type = "text" }) {
   const [editando, setEditando] = useState(false);
   const [tempValor, setTempValor] = useState(valor || '');

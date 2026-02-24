@@ -1,0 +1,68 @@
+.main-footer {
+  background-color: #ffffff;
+  border-top: 1px solid #e0e0e0;
+  padding: 15px 30px;
+  color: #666;
+  font-size: 14px;
+  margin-top: auto; /* Empurra para o fim se estiver num flex container */
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-info strong {
+  color: #333;
+}
+
+.footer-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  background-color: #28a745; /* Verde online */
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+}
+
+.footer-nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.footer-nav a {
+  color: #007bff;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.footer-nav a:hover {
+  text-decoration: underline;
+}
+
+.version {
+  background: #f8f9fa;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #999;
+}
+
+/* Responsividade para celulares */
+@media (max-width: 600px) {
+  .footer-container {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}
