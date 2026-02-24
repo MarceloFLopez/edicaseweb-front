@@ -1,59 +1,76 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom"; // Adicionado useLocation para efeito de link ativo
 import { AuthContext } from "../contexts/AuthContext";
-import Swal from "sweetalert2"; // 1. Importe o SweetAlert2
+import Swal from "sweetalert2";
 import "../assets/css/Header.css";
 
 export function Header() {
   const { user, logout } = useContext(AuthContext);
+  const location = useLocation(); // Para saber em qual página estamos
 
-  // 2. Crie a função de confirmação de saída
   const handleLogout = () => {
     Swal.fire({
       title: "Sair do sistema?",
-      text: "Você precisará fazer login novamente para acessar.",
+      text: "Sua sessão será encerrada com segurança.",
       icon: "question",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#1a1a1a",
       cancelButtonColor: "#d33",
       confirmButtonText: "Sim, sair",
       cancelButtonText: "Cancelar",
     }).then((result) => {
-      if (result.isConfirmed) {
-        logout(); // Executa a função de logout do seu Contexto
-      }
+      if (result.isConfirmed) logout();
     });
   };
 
   return (
     <nav className="header-nav">
       <div className="header-container">
-        <div className="header-links">
-          <Link to="/home" className="header-link">Home</Link>
+        <div className="header-left">
+          {/* Logo Editorial */}
+          <div className="header-brand">
+            EDITORIAL<span>CMS</span>
+          </div>
 
-          {user?.cargo === "USER" && (
-            <Link to="/programacao" className="header-link">Programação</Link>
-          )}
+          <div className="header-links">
+            <Link to="/home" className={`header-link ${location.pathname === '/home' ? 'active' : ''}`}>
+              Home
+            </Link>
 
-          {user?.cargo === "MANAGER" && (
-            <>
-              <Link to="/programacao" className="header-link">Programação</Link>
-              <Link to="/transacoes" className="header-link">Pagamentos</Link>
-              <Link to="/comunicados" className="header-link">Comunicados</Link>
-            </>
-          )}
+            {(user?.cargo === "USER" || user?.cargo === "MANAGER") && (
+              <Link to="/programacao" className={`header-link ${location.pathname === '/programacao' ? 'active' : ''}`}>
+                Programação
+              </Link>
+            )}
 
-          {user?.cargo === "ADMIN" && (
-            <Link to="/usuarios" className="header-link">Usuários</Link>
-          )}
+            {user?.cargo === "MANAGER" && (
+              <>
+                <Link to="/transacoes" className={`header-link ${location.pathname === '/transacoes' ? 'active' : ''}`}>
+                  Pagamentos
+                </Link>
+                <Link to="/comunicados" className={`header-link ${location.pathname === '/comunicados' ? 'active' : ''}`}>
+                  Comunicados
+                </Link>
+              </>
+            )}
+
+            {user?.cargo === "ADMIN" && (
+              <Link to="/usuarios" className={`header-link ${location.pathname === '/usuarios' ? 'active' : ''}`}>
+                Usuários
+              </Link>
+            )}
+          </div>
         </div>
 
         <div className="header-user-area">
-          <span className="header-user-info">
-            👤 <strong>{user?.email}</strong> ({user?.cargo})
-          </span>
-          {/* 3. Troque o onClick para a nova função handleLogout */}
-          <button onClick={handleLogout} className="btn-logout">
+          <div className="user-profile">
+             <div className="user-avatar">{user?.email?.charAt(0).toUpperCase()}</div>
+             <div className="user-details">
+                <span className="user-email">{user?.email}</span>
+                <span className="user-badge">{user?.cargo}</span>
+             </div>
+          </div>
+          <button onClick={handleLogout} className="btn-logout-minimal" title="Sair do sistema">
             Sair
           </button>
         </div>
