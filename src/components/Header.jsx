@@ -51,6 +51,9 @@ export function Header() {
                 <Link to="/comunicados" className={`header-link ${location.pathname === '/comunicados' ? 'active' : ''}`}>
                   Comunicados
                 </Link>
+                <Link to="/usuarios" className={`header-link ${location.pathname === '/usuarios' ? 'active' : ''}`}>
+                Usuários
+              </Link>
               </>
             )}
 

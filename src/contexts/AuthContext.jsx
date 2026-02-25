@@ -19,6 +19,7 @@ const [user, setUser] = useState(() => {
 const [loading, setLoading] = useState(true);
 
 useEffect(() => {
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   setLoading(false);
 }, []);
 

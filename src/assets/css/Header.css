@@ -29,14 +29,14 @@
     font-size: 1.4rem;
     font-weight: 900;
     letter-spacing: -1px;
-    color: #1a1a1a;
+    color: #024edb;
     border-right: 2px solid #e0e0e0;
     padding-right: 25px;
 }
 
 .header-brand span {
     font-weight: 300;
-    color: #666;
+    color: #024edb;
 }
 
 .header-links {
@@ -46,9 +46,9 @@
 
 .header-link {
     text-decoration: none;
-    color: #666;
+    color: #024edb;
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     transition: all 0.3s ease;
@@ -92,7 +92,7 @@
 .user-avatar {
     width: 36px;
     height: 36px;
-    background: #1a1a1a;
+    background: #034cd3;
     color: white;
     border-radius: 4px;
     display: flex;
@@ -108,14 +108,14 @@
 }
 
 .user-email {
-    font-size: 0.85rem;
+    font-size: 1rem;
     font-weight: 700;
-    color: #1a1a1a;
+    color: #0643b6;
 }
 
 .user-badge {
-    font-size: 0.7rem;
-    color: #999;
+    font-size: 1rem;
+    color: #7c87e9;
     text-transform: uppercase;
     letter-spacing: 1px;
 }

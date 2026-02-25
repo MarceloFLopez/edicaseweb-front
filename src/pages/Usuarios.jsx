@@ -135,7 +135,7 @@ export function Usuarios() {
 
             {(user?.cargo === 'ADMIN' || user?.cargo === 'MANAGER') && (
               <button className="btn-novo-comunicado" onClick={() => setModalAberto(true)}>
-                + NOVO USUÁRIO
+                + NOVO 
               </button>
             )}
           </div>

@@ -16,6 +16,7 @@ export function Login() {
   useEffect(() => {
     const emailSalvo = localStorage.getItem('@Editora:email');
     if (emailSalvo) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setEmail(emailSalvo);
       setLembrarMe(true);
     }

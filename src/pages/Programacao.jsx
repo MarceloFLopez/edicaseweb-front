@@ -230,7 +230,7 @@ const handleDelete = async (id) => {
       )}
     </div>
 
-    <button className="btn-novo-programacao" onClick={() => setModalAberto(true)}>+ NOVA</button>
+    <button className="btn-novo-programacao" onClick={() => setModalAberto(true)}>+ NOVO</button>
   </div>
 </div>
 

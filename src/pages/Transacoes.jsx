@@ -25,6 +25,7 @@ export function Transacoes() {
     }
   };
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { carregarTransacoes(); }, []);
 
   const handleUpdateInline = async (id, campo, valorOriginal, novoValor) => {
@@ -121,7 +122,7 @@ export function Transacoes() {
           </select>
 
           <button className="btn-novo-comunicado" onClick={() => setModalAberto(true)}>
-            + NOVA TRANSAÇÃO
+            + NOVO
           </button>
         </div>
 
@@ -223,6 +224,7 @@ function EditableCell({ valor, onSave, type = "text" }) {
   const [tempValor, setTempValor] = useState(valor || '');
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTempValor(valor || '');
   }, [valor]);
 

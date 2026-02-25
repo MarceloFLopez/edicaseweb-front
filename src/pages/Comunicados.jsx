@@ -144,7 +144,7 @@ export function Comunicados() {
               className="btn-novo-comunicado"
               onClick={() => handleAbrirModal()}
             >
-              + NOVO COMUNICADO
+              + NOVO 
             </button>
           )}
         </div>
