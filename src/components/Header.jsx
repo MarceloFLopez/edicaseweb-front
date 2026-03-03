@@ -14,7 +14,7 @@ export function Header() {
       text: "Sua sessão será encerrada com segurança.",
       icon: "question",
       showCancelButton: true,
-      confirmButtonColor: "#1a1a1a",
+      confirmButtonColor: "#2054fd",
       cancelButtonColor: "#d33",
       confirmButtonText: "Sim, sair",
       cancelButtonText: "Cancelar",
@@ -29,8 +29,9 @@ export function Header() {
         <div className="header-left">
           {/* Logo Editorial */}
           <div className="header-brand">
-            EDITORIAL<span>CMS</span>
+            EDITORIAL<span> GMD</span>
           </div>
+          
 
           <div className="header-links">
             <Link to="/home" className={`header-link ${location.pathname === '/home' ? 'active' : ''}`}>
@@ -41,6 +42,7 @@ export function Header() {
               <Link to="/programacao" className={`header-link ${location.pathname === '/programacao' ? 'active' : ''}`}>
                 Programação
               </Link>
+              
             )}
 
             {user?.cargo === "MANAGER" && (
@@ -51,9 +53,14 @@ export function Header() {
                 <Link to="/comunicados" className={`header-link ${location.pathname === '/comunicados' ? 'active' : ''}`}>
                   Comunicados
                 </Link>
+              <Link to="/epubs" className={`header-link ${location.pathname === '/epubs' ? 'active' : ''}`}>
+                Epubs
+              </Link>
                 <Link to="/usuarios" className={`header-link ${location.pathname === '/usuarios' ? 'active' : ''}`}>
                 Usuários
               </Link>
+
+
               </>
             )}
 

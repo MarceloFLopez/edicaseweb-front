@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Programacao } from './pages/Programacao';
 import { Transacoes } from './pages/Transacoes';
 import { Footer } from './components/Footer';
+import { Epubs } from './pages/Epubs';
 
 // ... imports ...
 
@@ -43,6 +44,7 @@ export default function App() {
           <Route path="/usuarios" element={<PrivateRoute><Usuarios /></PrivateRoute>} />
           <Route path="/programacao" element={<PrivateRoute><Programacao /></PrivateRoute>} />
           <Route path="/transacoes" element={<PrivateRoute><Transacoes /></PrivateRoute>} />
+          <Route path="/epubs" element={<PrivateRoute><Epubs /></PrivateRoute>} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
