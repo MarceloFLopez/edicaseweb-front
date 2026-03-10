@@ -156,22 +156,7 @@ export function Usuarios() {
             {usuariosFiltrados.map((u) => (
               <tr key={u.id}>
                 {/* 4. BOTÕES DE AÇÃO NA PRIMEIRA COLUNA */}
-                <td >
-                  <div className="acoes-group">
-                    <button 
-                      onClick={() => handleToggleStatus(u.id, u.ativo)}
-                      className={`btn-acao ${u.ativo ? 'btn-desativar' : 'btn-ativar'}`}
-                    >
-                      {u.ativo ? 'Desativar' : 'Ativar'}
-                    </button>
 
-                    {(user?.cargo === 'ADMIN' || user?.cargo === 'MANAGER') && (
-                      <button onClick={() => handleDelete(u.id)} className="btn-acao btn-excluir">
-                        🗑️
-                      </button>
-                    )}
-                  </div>
-                </td>
                 <td>{u.nome}</td>
                 <td>{u.email}</td>
                 <td>
@@ -194,6 +179,29 @@ export function Usuarios() {
                     {u.ativo ? '● Ativo' : '○ Inativo'}
                   </span>
                 </td>
+<td style={{ width: '60px' }}>
+  <div className="acoes-group">
+    {/* Botão de Status com ícone dinâmico */}
+    <button 
+      onClick={() => handleToggleStatus(u.id, u.ativo)}
+      className={`btn-acao-round ${u.ativo ? 'active' : 'inactive'}`}
+      title={u.ativo ? 'Desativar Usuário' : 'Ativar Usuário'}
+    >
+      {u.ativo ? '✅' : '🚫'}
+    </button>
+
+    {/* Botão de Excluir - Apenas para permissões elevadas */}
+    {(user?.cargo === 'ADMIN' || user?.cargo === 'MANAGER') && (
+      <button 
+        onClick={() => handleDelete(u.id)} 
+        className="btn-acao-round btn-excluir"
+        title="Excluir Usuário"
+      >
+        🗑️
+      </button>
+    )}
+  </div>
+</td>
               </tr>
             ))}
           </tbody>

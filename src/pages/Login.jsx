@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react'; // Adicionado useEffect
+import { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -7,12 +7,12 @@ import '../assets/css/Login.css';
 export function Login() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const [lembrarMe, setLembrarMe] = useState(false); // Estado do Checkbox
-  
+  const [lembrarMe, setLembrarMe] = useState(false);
+  const [loading, setLoading] = useState(false); // 1. Adicionado estado de loading
+
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // Ao carregar a página, verifica se existe um e-mail salvo
   useEffect(() => {
     const emailSalvo = localStorage.getItem('@Editora:email');
     if (emailSalvo) {
@@ -24,11 +24,11 @@ export function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setLoading(true); // 2. Começa o carregamento
 
     const result = await login(email, senha);
 
     if (result.success) {
-      // Se "Lembrar de mim" estiver marcado, salva o e-mail. Caso contrário, remove.
       if (lembrarMe) {
         localStorage.setItem('@Editora:email', email);
       } else {
@@ -36,8 +36,14 @@ export function Login() {
       }
 
       toast.success(`Acesso autorizado!`);
-      navigate('/home');
+
+      // 3. Aguarda 2 segundos com o spinner ativo antes de navegar
+      setTimeout(() => {
+        navigate('/home');
+      }, 2000);
+
     } else {
+      setLoading(false); // 4. Para o carregamento se houver erro
       toast.error(result.message || "Credenciais inválidas");
     }
   }
@@ -63,6 +69,7 @@ export function Login() {
               value={email} 
               onChange={(e) => setEmail(e.target.value)} 
               placeholder="exemplo@editora.com.br"
+              disabled={loading} // Desabilita campos durante loading
               required 
             />
           </div>
@@ -74,24 +81,30 @@ export function Login() {
               value={senha} 
               onChange={(e) => setSenha(e.target.value)} 
               placeholder="••••••••"
+              disabled={loading} // Desabilita campos durante loading
               required 
             />
           </div>
 
-          {/* NOVO: CHECKBOX LEMBRAR DE MIM */}
           <div className="remember-container">
             <label className="checkbox-label">
               <input 
                 type="checkbox" 
                 checked={lembrarMe}
                 onChange={(e) => setLembrarMe(e.target.checked)}
+                disabled={loading}
               />
               <span>Lembrar meu e-mail</span>
             </label>
           </div>
 
-          <button type="submit" className="btn-login">
-            Entrar no Sistema
+          {/* 5. Botão alterado para mostrar o spinner */}
+          <button type="submit" className="btn-login" enabled={loading}>
+            {loading ? (
+              <div className="spinner-loader"></div>
+            ) : (
+              "Entrar no Sistema"
+            )}
           </button>
 
           <div className="login-footer">

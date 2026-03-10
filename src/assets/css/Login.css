@@ -120,3 +120,58 @@
 @media (max-width: 900px) {
   .login-branding { display: none; }
 }
+/* --- ESTILOS DO SPINNER --- */
+
+.spinner-loader {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3); /* Círculo de fundo suave */
+  border-radius: 50%;
+  border-top-color: #fff; /* A parte branca que vai girar */
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto; /* Centraliza no botão */
+}
+
+/* Animação de rotação */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Estágio do botão quando está carregando */
+.btn-login:disabled {
+  background-color: #444; /* Fica um pouco mais claro */
+  cursor: not-allowed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- ESTILOS DO SPINNER --- */
+
+.spinner-loader {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3); /* Círculo de fundo suave */
+  border-radius: 50%;
+  border-top-color: #fff; /* A parte branca que vai girar */
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto; /* Centraliza no botão */
+}
+
+/* Animação de rotação */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Estágio do botão quando está carregando */
+.btn-login:disabled {
+  background-color: #444; /* Fica um pouco mais claro */
+  cursor: not-allowed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -42,6 +42,8 @@
     outline: none;
 }
 
+
+
 .input-busca {
     flex: 1;
     min-width: 250px;
@@ -135,31 +137,53 @@
 }
 
 /* ===== BOTÕES DE AÇÃO ===== */
-.btn-acao {
-    padding: 8px 14px;
-    border: none;
-    border-radius: 6px;
+.acoes-group {
+    display: flex;
+    gap: 8px;
+    justify-content: center; /* Centralizado geralmente fica melhor em tabelas */
+    align-items: center;
+}
+
+/* Botão base circular */
+.btn-acao-round {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px; /* Quadrado arredondado moderno */
+    border: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    font-size: 12px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    background: white;
+    font-size: 14px;
 }
 
-.btn-excluir {
+/* Estado: Ativo (Botão para desativar) */
+.btn-acao-round.active:hover {
+    background-color: #fee2e2;
+    border-color: #f87171;
+    color: #ef4444;
+}
+
+/* Estado: Inativo (Botão para ativar) */
+.btn-acao-round.inactive:hover {
+    background-color: #dcfce7;
+    border-color: #4ade80;
+    color: #16a34a;
+}
+
+/* Botão Excluir */
+.btn-acao-round.btn-excluir:hover {
+    background-color: #475569;
     color: white;
+    border-color: #1e293b;
 }
 
-.btn-excluir:hover {
-    background-color: #c82333;
-    box-shadow: 0 2px 8px white
+/* Efeito de clique */
+.btn-acao-round:active {
+    transform: scale(0.9);
 }
-
-.btn-acao:active {
-    transform: scale(0.95);
-}
-
 /* ===== MODAL ===== */
 .modal-overlay {
     position: fixed;

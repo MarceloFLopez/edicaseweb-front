@@ -59,12 +59,14 @@ th.sticky-col {
   overflow-y: auto;
   width: 100%;
   max-width: 800px;
+  
 }
 
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 15px;
+  gap: 12px 20px; /* Espaçamento entre colunas e linhas */
+  margin-top: 10px;
 }
 
 .full-width {
@@ -86,12 +88,35 @@ th.sticky-col {
   display: block; /* Garante comportamento de bloco */
   border: 1px solid #ddd;
 }
+.programacao-table td {
+  max-width: 200px; /* Ajuste conforme preferir */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .programacao-table th,
 .programacao-table td {
   white-space: nowrap;
   padding: 12px 15px;
 }
+/* Aplica um fundo leve em colunas ímpares para criar separação */
+.programacao-table td:nth-child(odd) {
+  background-color: rgba(248, 250, 252, 0.5); /* Um cinza azulado quase invisível */
+}
+
+/* Adiciona uma borda lateral fina em todas as células para verticalizar o olhar */
+.programacao-table td {
+  border-right: 1px solid #d9e2eb; 
+  transition: background-color 0.2s ease;
+}
+
+/* Remove a borda da última coluna para não sobrar no canto */
+.programacao-table td:last-child, 
+.programacao-table th:last-child {
+  border-right: none;
+}
+
 
 /* Estilização da barra de scroll para ficar mais bonita (opcional) */
 
@@ -100,7 +125,7 @@ th.sticky-col {
 }
 
 .table-wrapper::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #a09e9e;
   border-radius: 10px;
 }
 
@@ -131,19 +156,25 @@ th.sticky-col {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(15, 23, 42, 0.7); /* Overlay mais moderno (escuro azulado) */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  backdrop-filter: blur(4px); /* Suaviza o fundo */
+  padding: 20px; /* Garante que o modal não encoste nas bordas em telas pequenas */
 }
 
 .modal-content {
   background: white;
-  padding: 20px;
-  border-radius: 12px;
-  width: 800px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 700px; /* Reduzido de 800px para ficar mais elegante */
+  max-height: 90vh; /* Altura máxima de 90% da visão do navegador */
+  overflow-y: auto; /* Se o conteúdo crescer, cria scroll interno */
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  position: relative;
 }
 
 .modal-content h2 {
@@ -161,11 +192,19 @@ th.sticky-col {
 
 .modal-content input,
 .modal-content textarea {
-  width: 95%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  width: 100%; /* Ajustado para preencher o container */
+  padding: 10px 12px;
+  margin-bottom: 5px; /* Reduzido a margem inferior */
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box; /* Fundamental para o padding não estourar a largura */
+  transition: border-color 0.2s;
+}
+
+.modal-content input:focus {
+  border-color: #3b82f6;
+  outline: none;
 }
 
 .modal-actions {

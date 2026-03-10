@@ -317,7 +317,7 @@
 
 .editable-cell-box:hover {
     background-color: #f0f7ff;
-    border: 1px dashed #007bff;
+    border: 1px solid #007bff;
 }
 
 .inline-edit-input {

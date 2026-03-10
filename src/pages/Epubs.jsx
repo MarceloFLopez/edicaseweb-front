@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import api from '../services/api';
 import { AuthContext } from '../contexts/AuthContext';
-import '../assets/css/Transacoes.css'; // Usando o mesmo CSS
+import '../assets/css/Epubs.css'; // Usando o mesmo CSS
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
@@ -179,8 +179,8 @@ export function Epubs() {
                       className={`badge ${e.status}`}
                       style={{ border: 'none', cursor: 'pointer', appearance: 'none' }}
                     >
-                      <option value="pendente">PENDENTE</option>
-                      <option value="concluido">CONCLUÍDO</option>
+                      <option value="pendente">🚫 PENDENTE</option>
+                      <option value="concluido">✅ CONCLUÍDO</option>
                     </select>
                   </td>
                 </tr>
