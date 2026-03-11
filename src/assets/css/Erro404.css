@@ -1,0 +1,136 @@
+/* Fundo tecnológico com Scanlines */
+.erro-404-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  background: #0d1117; /* Escuro profundo */
+  color: #00f2ff; /* Ciano Elétrico */
+  font-family: 'Courier New', Courier, monospace;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Efeito de linhas de monitor antigo (Scanlines) */
+.erro-404-container::after {
+  content: " ";
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+              linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* 404 com Efeito Glitch de Cor (Cromático) */
+.erro-404-container h1 {
+  font-size: 14rem;
+  font-weight: 900;
+  margin: 0;
+  line-height: 1;
+  position: relative;
+  color: #fff;
+  text-transform: uppercase;
+  animation: tremor 0.2s infinite;
+}
+
+/* Camadas de cor para o efeito robótico */
+.erro-404-container h1::before,
+.erro-404-container h1::after {
+  content: "404";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  opacity: 0.8;
+}
+
+.erro-404-container h1::before {
+  color: #ff00c1; /* Magenta */
+  z-index: -1;
+  animation: glitch-anim 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+}
+
+.erro-404-container h1::after {
+  color: #00f2ff; /* Ciano */
+  z-index: -2;
+  animation: glitch-anim 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
+}
+
+/* Subtítulo Estilo Digitação */
+.erro-404-container h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  color: #00f2ff;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  overflow: hidden;
+  border-right: 3px solid #00f2ff;
+  white-space: nowrap;
+  animation: typing 3s steps(20, end) infinite, blink 0.5s step-end infinite;
+}
+
+/* Texto de status */
+.erro-404-container p {
+  font-size: 0.9rem;
+  color: #4b5563;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+/* Botão Estilo Terminal Moderno */
+.btn-voltar {
+  margin-top: 3rem;
+  padding: 12px 40px;
+  background: transparent;
+  color: #00f2ff;
+  border: 1px solid #00f2ff;
+  font-family: inherit;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s;
+  z-index: 20;
+}
+
+.btn-voltar:hover {
+  background: #00f2ff;
+  color: #000;
+  box-shadow: 0 0 20px #00f2ff;
+  transform: skewX(-10deg); /* Inclinação robótica */
+}
+
+/* --- ANIMAÇÕES --- */
+
+/* Tremor constante no número */
+@keyframes tremor {
+  0% { transform: translate(0) }
+  25% { transform: translate(1px, 1px) }
+  50% { transform: translate(-1px, -1px) }
+  75% { transform: translate(1px, -1px) }
+  100% { transform: translate(-1px, 1px) }
+}
+
+/* Desvio de cores (Glitch) */
+@keyframes glitch-anim {
+  0% { transform: translate(0); }
+  20% { transform: translate(-5px, 5px); }
+  40% { transform: translate(-5px, -5px); }
+  60% { transform: translate(5px, 5px); }
+  80% { transform: translate(5px, -5px); }
+  100% { transform: translate(0); }
+}
+
+/* Efeito de Digitação Robótica */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink {
+  from, to { border-color: transparent }
+  50% { border-color: #00f2ff; }
+}

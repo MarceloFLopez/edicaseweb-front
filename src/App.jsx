@@ -12,13 +12,14 @@ import { Programacao } from './pages/Programacao';
 import { Transacoes } from './pages/Transacoes';
 import { Footer } from './components/Footer';
 import { Epubs } from './pages/Epubs';
-
-// ... imports ...
+import { Pagina404 } from './pages/Pagina404'; 
+import { Pagina500 } from './pages/Pagina500'; 
 
 function PrivateRoute({ children }) {
   const { authenticated, loading } = useContext(AuthContext);
-  if (loading) return <div>Carregando...</div>;
-  if (!authenticated) return <Navigate to="/" />;
+  
+  if (loading) return <div className="loading-screen">Carregando...</div>;
+  if (!authenticated) return <Navigate to="/" replace />;
   
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -37,14 +38,24 @@ export default function App() {
       <BrowserRouter>
         <ToastContainer position="top-right" autoClose={3000} />
         <Routes>
+          {/* Rota Pública */}
           <Route path="/" element={<Login />} />
-          {/* Todas as rotas abaixo agora ganham Header e Footer automaticamente */}
-          <Route path="/comunicados" element={<PrivateRoute><Comunicados /></PrivateRoute>} />
+          
+          {/* Rotas Privadas (Protegidas) */}
           <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
+          <Route path="/comunicados" element={<PrivateRoute><Comunicados /></PrivateRoute>} />
           <Route path="/usuarios" element={<PrivateRoute><Usuarios /></PrivateRoute>} />
           <Route path="/programacao" element={<PrivateRoute><Programacao /></PrivateRoute>} />
           <Route path="/transacoes" element={<PrivateRoute><Transacoes /></PrivateRoute>} />
           <Route path="/epubs" element={<PrivateRoute><Epubs /></PrivateRoute>} />
+          
+          {/* Rotas de Erro (Acessíveis pelo Interceptor ou URL) */}
+          <Route path="/404" element={<Pagina404 />} />
+          <Route path="/500" element={<Pagina500 />} />
+          
+          {/* CAPTURA GLOBAL (Apenas uma!) 
+              Se o usuário digitar uma URL que não existe, ele cai aqui. */}
+          <Route path="*" element={<Navigate to="/404" replace />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

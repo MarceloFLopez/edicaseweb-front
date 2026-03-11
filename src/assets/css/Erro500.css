@@ -1,0 +1,110 @@
+/* Container com Alerta de Emergência */
+.erro-500-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  background: #1a0505; /* Fundo avermelhado escuro */
+  color: #ff4d4d;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  position: relative;
+  /* Animação de luz de emergência no fundo */
+  animation: luz-emergencia 4s infinite;
+}
+
+/* O "500" Derretendo / Glitch Pesado */
+.erro-500-container h1 {
+  font-size: 15rem;
+  font-weight: 900;
+  margin: 0;
+  line-height: 0.8;
+  letter-spacing: -10px;
+  position: relative;
+  color: #ff0000;
+  text-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+  animation: sacudir 0.1s infinite;
+}
+
+/* Efeito de "Fumaça" ou Ruído atrás do número */
+.erro-500-container h1::before {
+  content: "500";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  filter: blur(20px);
+  opacity: 0.5;
+  animation: expansao-termica 2s infinite;
+}
+
+/* Subtítulo de Alerta Crítico */
+.erro-500-container h2 {
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  margin-top: 20px;
+  color: #fff;
+  background: #ff0000;
+  padding: 5px 20px;
+  transform: rotate(-2deg); /* Estilo de fita de interdição */
+  box-shadow: 10px 10px 0 #000;
+}
+
+/* Descrição com estilo de Log de Erro */
+.erro-500-container p {
+  font-size: 1rem;
+  color: #ffa8a8;
+  max-width: 500px;
+  margin-top: 20px;
+  font-family: 'Courier New', Courier, monospace;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  border-left: 4px solid #ff0000;
+}
+
+/* Botão de Reinicialização Forçada */
+.btn-voltar {
+  margin-top: 3rem;
+  padding: 15px 40px;
+  background: #fff;
+  color: #ff0000;
+  border: none;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%); /* Formato trapezoidal industrial */
+  transition: 0.3s;
+}
+
+.btn-voltar:hover {
+  background: #ff0000;
+  color: #fff;
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+}
+
+/* --- ANIMAÇÕES DE CAOS --- */
+
+/* Pulsação de luz vermelha no fundo */
+@keyframes luz-emergencia {
+  0%, 100% { background-color: #1a0505; }
+  50% { background-color: #450a0a; }
+}
+
+/* Tremor de alta frequência (instabilidade) */
+@keyframes sacudir {
+  0% { transform: translate(0); }
+  25% { transform: translate(2px, -2px) rotate(0.5deg); }
+  50% { transform: translate(-2px, 2px) rotate(-0.5deg); }
+  75% { transform: translate(2px, 2px); }
+  100% { transform: translate(-2px, -2px); }
+}
+
+/* Efeito de calor saindo do número */
+@keyframes expansao-termica {
+  0% { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
